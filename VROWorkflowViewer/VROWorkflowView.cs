@@ -15,11 +15,11 @@ namespace VROWorkflowViewer
         Stack<TabPage> history;
         RichTextBox currentBox;
         Label currentLabel;
-
+        FormWindowState lastState;
         public VROWorkflowView()
         {
             InitializeComponent();
-            multiTabs.TabPages.Remove(TemplatePage);
+            lastState = WindowState;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,11 +64,24 @@ namespace VROWorkflowViewer
             
         }
 
-        private void CopyRTB(RichTextBox iRTB,ref RichTextBox box)
+        private void CopyRTB(RichTextBox iRTB,ref RichTextBox box,Boolean fullscreen=false)
         {            
             box.Font = iRTB.Font;
-            box.Size = iRTB.Size;
-            box.Location = iRTB.Location;
+
+            if (fullscreen)
+            {
+                box.Location = new Point(5, 15);
+                box.Height = multiTabs.Height - 140 + 65;
+            }
+            else
+            {
+                box.Location = new Point(5, 80);
+                box.Height = multiTabs.Height - 140;
+            }
+
+            box.Width = multiTabs.Width - 25;
+            
+
             box.Anchor = iRTB.Anchor;
             box.Dock = iRTB.Dock;
             box.BackColor = iRTB.BackColor;
@@ -82,9 +95,10 @@ namespace VROWorkflowViewer
 
         private void CopyBOX(TextBox iBOX,ref TextBox box)
         {            
-            box.Font = iBOX.Font;
-            box.Size = iBOX.Size;
-            box.Location = iBOX.Location;
+            box.Font = iBOX.Font;            
+            box.Location = new Point(5, 15);
+            box.Width = multiTabs.Width - 25;
+            box.Height = 50;
             box.Anchor = iBOX.Anchor;
             box.Dock = iBOX.Dock;
             box.BackColor = iBOX.BackColor;
@@ -97,8 +111,9 @@ namespace VROWorkflowViewer
         private void CopyLabel(Label iLabel, Label oLabel)
         {
             oLabel.Font = iLabel.Font;
-            oLabel.Size = iLabel.Size;
-            oLabel.Location = iLabel.Location;
+            oLabel.Location = new Point(5, multiTabs.Height - 50); 
+            oLabel.Width = 100;
+            oLabel.Height = 20;                       
             oLabel.Anchor = iLabel.Anchor;
             oLabel.Dock = iLabel.Dock;
             oLabel.BackColor = iLabel.BackColor;
@@ -113,11 +128,11 @@ namespace VROWorkflowViewer
             TabPage page = null;
             Label lab = null;
             String[] tabs = {"Inputs","Attributes"}; // Removed Sequence
-            foreach (TabPage cPage in multiTabs.TabPages)
-            {
-                cPage.Controls.Clear();
-                multiTabs.TabPages.Remove(cPage);                
-            }
+            //foreach (TabPage cPage in multiTabs.TabPages)
+            //{
+            //    cPage.Controls.Clear();
+            //    multiTabs.TabPages.Remove(cPage);                
+            //}
             foreach (String tabName in tabs)
             {
                 page = new TabPage();
@@ -126,7 +141,8 @@ namespace VROWorkflowViewer
                 box = new RichTextBox();
                 page.Controls.Add(box);
                 multiTabs.TabPages.Add(page); 
-                CopyRTB(templateRTB, ref box);                
+                CopyRTB(templateRTB, ref box,true);
+                box.ContextMenuStrip = null;
                 
                 switch (tabName)
                 {
@@ -169,7 +185,7 @@ namespace VROWorkflowViewer
                 box.Name = "RTB-" + wfi.itemName;
                 box.KeyDown += TextBoxMonitorKeyDown;
                 box.KeyUp += TextBoxMonitorKeyUp;
-                box.Click += box_Click;
+                box.Click += RTBBoxClicked;
                 sumBox = new TextBox();
                 sumBox.Name = "SUMMARY-" + wfi.itemName;
 
@@ -205,7 +221,7 @@ namespace VROWorkflowViewer
 
         }
 
-        void box_Click(object sender, EventArgs e)
+        void RTBBoxClicked(object sender, EventArgs e)
         {
             RTBLineNumber();
         }
@@ -259,11 +275,6 @@ namespace VROWorkflowViewer
             {
                 RTBLineNumber();
             }
-            //else if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down || e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.PageDown || e.KeyCode == Keys.PageUp)
-            //{
-            //    RTBLineNumber();
-            //    e.Handled = false;
-            //}
             else
             {
                 e.Handled = false;
@@ -364,8 +375,7 @@ namespace VROWorkflowViewer
         {
             if (currentBox != null)
             {
-                currentBox.Copy();
-                //Clipboard.SetText(currentBox.SelectedText);
+                currentBox.Copy();                
             }
         }
 
@@ -374,8 +384,5 @@ namespace VROWorkflowViewer
             AboutBox1 ab = new AboutBox1();
             ab.ShowDialog();
         }
-
-
-
     }
 }
