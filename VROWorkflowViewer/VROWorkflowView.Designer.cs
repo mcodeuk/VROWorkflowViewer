@@ -278,6 +278,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "VROWorkflowView";
             this.Text = "VRO Workflow Viewer";
             this.menuStrip1.ResumeLayout(false);
