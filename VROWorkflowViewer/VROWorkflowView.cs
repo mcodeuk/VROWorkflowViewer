@@ -13,6 +13,9 @@ namespace VROWorkflowViewer
     {
         VROWorkFlow workflowitems;
         Stack<TabPage> history;
+        RichTextBox currentBox;
+        Label currentLabel;
+
         public VROWorkflowView()
         {
             InitializeComponent();
@@ -24,6 +27,12 @@ namespace VROWorkflowViewer
             this.Close();
         }
 
+        private void ReInit()
+        {
+            history = new Stack<TabPage>();
+            currentBox = null;
+            currentLabel = null;
+        }
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -33,14 +42,14 @@ namespace VROWorkflowViewer
             {
                 workflowitems = new VROWorkFlow(ofd.FileName);
                 rootToolStripMenuItem.Enabled = true;
-                history = new Stack<TabPage>();
+                ReInit();
             }
         }
 
         private void importFromClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             workflowitems = new VROWorkFlow();
-            history = new Stack<TabPage>();
+            ReInit();
             if (workflowitems.ParseWorkFlow(Clipboard.GetText()))
             {
                 DisplayWorkFlowItems();
@@ -98,6 +107,7 @@ namespace VROWorkflowViewer
 
         private void DisplayWorkFlowItems()
         {
+            multiTabs.TabPages.Clear();
             RichTextBox box = null;
             TextBox sumBox = null;
             TabPage page = null;
@@ -291,12 +301,12 @@ namespace VROWorkflowViewer
             multiTabs.SelectedTab = multiTabs.TabPages[cwfi.altOutItemName];
         }
 
-        RichTextBox currentBox;
-        Label currentLabel;
+
         private void NewTabPage(object sender, TabControlEventArgs e)
         {
             currentBox = null;
             currentLabel = null;
+            if (e.TabPage == null) return;
             System.Diagnostics.Debug.Print("New Tab : " + e.TabPage.Name + " Orig : " + multiTabs.SelectedTab.Name);
             if (e.TabPage.Tag != null)
             {
