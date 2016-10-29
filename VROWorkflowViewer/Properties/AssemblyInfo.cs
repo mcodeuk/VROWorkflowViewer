@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("VROWorkflowViewer")]
 [assembly: AssemblyDescription("This utilitity can be used to display the XML for a VRO Workflow. If for example a Workflow has been exported to GIT using XML then simply open the file or import the content from Clipboard")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Licence Owner")]
+[assembly: AssemblyCompany("MCode UK")]
 [assembly: AssemblyProduct("VROWorkflowViewer")]
-[assembly: AssemblyCopyright("Copyright © Licence Owner 2016")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.1")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyVersion("1.0.0.2")]
+[assembly: AssemblyFileVersion("1.0.0.2")]

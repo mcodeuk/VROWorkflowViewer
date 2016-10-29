@@ -42,6 +42,8 @@
             this.rootToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabsToSpacesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.multiTabs = new System.Windows.Forms.TabControl();
             this.TemplatePage = new System.Windows.Forms.TabPage();
             this.PositionMarker = new System.Windows.Forms.Label();
@@ -50,12 +52,16 @@
             this.stdCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.selectAlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonROOT = new System.Windows.Forms.Button();
+            this.buttonLAST = new System.Windows.Forms.Button();
+            this.buttonNEXT = new System.Windows.Forms.Button();
+            this.buttonALTNEXT = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.multiTabs.SuspendLayout();
             this.TemplatePage.SuspendLayout();
             this.stdCMS.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -164,40 +170,58 @@
             // 
             this.tabsToSpacesToolStripMenuItem.Name = "tabsToSpacesToolStripMenuItem";
             this.tabsToSpacesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.T)));
-            this.tabsToSpacesToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.tabsToSpacesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
             this.tabsToSpacesToolStripMenuItem.Text = "Tabs To Spaces";
             this.tabsToSpacesToolStripMenuItem.Click += new System.EventHandler(this.tabsToSpacesToolStripMenuItem_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
             // multiTabs
             // 
+            this.multiTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.multiTabs.Controls.Add(this.TemplatePage);
-            this.multiTabs.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.multiTabs.Location = new System.Drawing.Point(0, 24);
+            this.multiTabs.Location = new System.Drawing.Point(0, 67);
             this.multiTabs.Name = "multiTabs";
             this.multiTabs.SelectedIndex = 0;
-            this.multiTabs.Size = new System.Drawing.Size(992, 509);
+            this.multiTabs.Size = new System.Drawing.Size(992, 466);
             this.multiTabs.TabIndex = 1;
             this.multiTabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.NewTabPage);
             this.multiTabs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MonitorKeyDown);
             // 
             // TemplatePage
             // 
+            this.TemplatePage.BackColor = System.Drawing.SystemColors.Control;
             this.TemplatePage.Controls.Add(this.PositionMarker);
             this.TemplatePage.Controls.Add(this.templateSummary);
             this.TemplatePage.Controls.Add(this.templateRTB);
             this.TemplatePage.Location = new System.Drawing.Point(4, 22);
             this.TemplatePage.Name = "TemplatePage";
             this.TemplatePage.Padding = new System.Windows.Forms.Padding(3);
-            this.TemplatePage.Size = new System.Drawing.Size(984, 483);
+            this.TemplatePage.Size = new System.Drawing.Size(984, 440);
             this.TemplatePage.TabIndex = 0;
             this.TemplatePage.Text = "Overview";
-            this.TemplatePage.UseVisualStyleBackColor = true;
             // 
             // PositionMarker
             // 
             this.PositionMarker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PositionMarker.AutoSize = true;
-            this.PositionMarker.Location = new System.Drawing.Point(3, 464);
+            this.PositionMarker.Location = new System.Drawing.Point(3, 421);
             this.PositionMarker.Name = "PositionMarker";
             this.PositionMarker.Size = new System.Drawing.Size(114, 13);
             this.PositionMarker.TabIndex = 2;
@@ -226,7 +250,7 @@
             this.templateRTB.Location = new System.Drawing.Point(3, 79);
             this.templateRTB.Name = "templateRTB";
             this.templateRTB.ReadOnly = true;
-            this.templateRTB.Size = new System.Drawing.Size(973, 381);
+            this.templateRTB.Size = new System.Drawing.Size(973, 338);
             this.templateRTB.TabIndex = 0;
             this.templateRTB.Text = "";
             this.templateRTB.WordWrap = false;
@@ -253,27 +277,68 @@
             this.copyToolStripMenuItem1.Text = "Copy";
             this.copyToolStripMenuItem1.Click += new System.EventHandler(this.copyToolStripMenuItem1_Click);
             // 
-            // helpToolStripMenuItem
+            // panel1
             // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
+            this.panel1.Controls.Add(this.buttonALTNEXT);
+            this.panel1.Controls.Add(this.buttonNEXT);
+            this.panel1.Controls.Add(this.buttonLAST);
+            this.panel1.Controls.Add(this.buttonROOT);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(992, 41);
+            this.panel1.TabIndex = 2;
             // 
-            // aboutToolStripMenuItem
+            // buttonROOT
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.H)));
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.buttonROOT.Enabled = false;
+            this.buttonROOT.Location = new System.Drawing.Point(10, 6);
+            this.buttonROOT.Name = "buttonROOT";
+            this.buttonROOT.Size = new System.Drawing.Size(75, 23);
+            this.buttonROOT.TabIndex = 0;
+            this.buttonROOT.Text = "Root";
+            this.buttonROOT.UseVisualStyleBackColor = true;
+            this.buttonROOT.Click += new System.EventHandler(this.buttonROOT_Click);
+            // 
+            // buttonLAST
+            // 
+            this.buttonLAST.Enabled = false;
+            this.buttonLAST.Location = new System.Drawing.Point(100, 6);
+            this.buttonLAST.Name = "buttonLAST";
+            this.buttonLAST.Size = new System.Drawing.Size(75, 23);
+            this.buttonLAST.TabIndex = 1;
+            this.buttonLAST.Text = "Last";
+            this.buttonLAST.UseVisualStyleBackColor = true;
+            this.buttonLAST.Click += new System.EventHandler(this.buttonLAST_Click);
+            // 
+            // buttonNEXT
+            // 
+            this.buttonNEXT.Enabled = false;
+            this.buttonNEXT.Location = new System.Drawing.Point(190, 6);
+            this.buttonNEXT.Name = "buttonNEXT";
+            this.buttonNEXT.Size = new System.Drawing.Size(75, 23);
+            this.buttonNEXT.TabIndex = 2;
+            this.buttonNEXT.Text = "Next";
+            this.buttonNEXT.UseVisualStyleBackColor = true;
+            this.buttonNEXT.Click += new System.EventHandler(this.buttonNEXT_Click);
+            // 
+            // buttonALTNEXT
+            // 
+            this.buttonALTNEXT.Enabled = false;
+            this.buttonALTNEXT.Location = new System.Drawing.Point(280, 6);
+            this.buttonALTNEXT.Name = "buttonALTNEXT";
+            this.buttonALTNEXT.Size = new System.Drawing.Size(75, 23);
+            this.buttonALTNEXT.TabIndex = 3;
+            this.buttonALTNEXT.Text = "Alt Next";
+            this.buttonALTNEXT.UseVisualStyleBackColor = true;
+            this.buttonALTNEXT.Click += new System.EventHandler(this.buttonALTNEXT_Click);
             // 
             // VROWorkflowView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(992, 533);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.multiTabs);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -287,6 +352,7 @@
             this.TemplatePage.ResumeLayout(false);
             this.TemplatePage.PerformLayout();
             this.stdCMS.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -316,6 +382,11 @@
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonALTNEXT;
+        private System.Windows.Forms.Button buttonNEXT;
+        private System.Windows.Forms.Button buttonLAST;
+        private System.Windows.Forms.Button buttonROOT;
     }
 }
 

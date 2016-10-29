@@ -42,6 +42,7 @@ namespace VROWorkflowViewer
             {
                 workflowitems = new VROWorkFlow(ofd.FileName);
                 rootToolStripMenuItem.Enabled = true;
+                buttonROOT.Enabled = true;
                 ReInit();
             }
         }
@@ -54,11 +55,13 @@ namespace VROWorkflowViewer
             {
                 DisplayWorkFlowItems();
                 rootToolStripMenuItem.Enabled = true;
+                buttonROOT.Enabled = true;
             }
             else
             {                
                 MessageBox.Show("Error : " + workflowitems.errorMessage,"VRO Workflow Viewer");
                 rootToolStripMenuItem.Enabled = false;
+                buttonROOT.Enabled = false;
             }
             
             
@@ -325,17 +328,27 @@ namespace VROWorkflowViewer
                 currentBox = e.TabPage.Controls["RTB-" + wfi.itemName] as RichTextBox;
                 currentLabel = e.TabPage.Controls["LABEL-" + wfi.itemName] as Label;
                 alternateNextToolStripMenuItem.Enabled = wfi.altOutItemName != null;
+                buttonALTNEXT.Enabled = alternateNextToolStripMenuItem.Enabled;
                 nextToolStripMenuItem.Enabled = wfi.outItemName != null;
+                buttonNEXT.Enabled = nextToolStripMenuItem.Enabled;
                 lastToolStripMenuItem.Enabled = false;
+                buttonLAST.Enabled = false;
                 if (history.Count == 0 || history.Peek() != e.TabPage) history.Push(e.TabPage);
             }
             else
             {
                 nextToolStripMenuItem.Enabled = false;
+                buttonNEXT.Enabled = false;
                 lastToolStripMenuItem.Enabled = false;
+                buttonLAST.Enabled = false;
                 alternateNextToolStripMenuItem.Enabled = false;
+                buttonALTNEXT.Enabled = false;
             }
-            if (history.Count > 1) lastToolStripMenuItem.Enabled = true;
+            if (history.Count > 1)
+            {
+                lastToolStripMenuItem.Enabled = true;
+                buttonLAST.Enabled = true;
+            }
         }
 
         private void rootToolStripMenuItem_Click(object sender, EventArgs e)
@@ -343,6 +356,7 @@ namespace VROWorkflowViewer
             history = new Stack<TabPage>();
             multiTabs.SelectedTab = multiTabs.TabPages[workflowitems.rootItem];            
             lastToolStripMenuItem.Enabled = false;
+            buttonLAST.Enabled = false;
         }
 
         private void tabsToSpacesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -363,7 +377,11 @@ namespace VROWorkflowViewer
             {
                 multiTabs.SelectedTab = history.Peek();
             }
-            if (history.Count < 2) lastToolStripMenuItem.Enabled = false;
+            if (history.Count < 2)
+            {
+                lastToolStripMenuItem.Enabled = false;
+                buttonLAST.Enabled = false;
+            }
         }
 
         private void selectAlToolStripMenuItem_Click(object sender, EventArgs e)
@@ -383,6 +401,26 @@ namespace VROWorkflowViewer
         {
             AboutBox1 ab = new AboutBox1();
             ab.ShowDialog();
+        }
+
+        private void buttonROOT_Click(object sender, EventArgs e)
+        {
+            if (rootToolStripMenuItem.Enabled) rootToolStripMenuItem_Click(null, null);
+        }
+
+        private void buttonLAST_Click(object sender, EventArgs e)
+        {
+            if (lastToolStripMenuItem.Enabled) lastToolStripMenuItem_Click(null, null);
+        }
+
+        private void buttonNEXT_Click(object sender, EventArgs e)
+        {
+            if (nextToolStripMenuItem.Enabled) nextToolStripMenuItem_Click(null, null);
+        }
+
+        private void buttonALTNEXT_Click(object sender, EventArgs e)
+        {
+            if (alternateNextToolStripMenuItem.Enabled) alternateNextToolStripMenuItem_Click(null, null);
         }
     }
 }
